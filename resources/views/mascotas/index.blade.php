@@ -27,7 +27,14 @@
         <tbody>
             @foreach ($mascotas as $mascota)
                 <tr>
-                    <td>Foto</td>
+                    <td>
+                        @if ($mascota->foto)
+                            <img src="{{ asset('storage/' . $mascota->foto)}}" alt="{{$mascota->nombre}}" width="50">
+                        @else
+                            Sin Foto
+                        @endif
+
+                    </td>
                     <td>{{$mascota->nombre}}</td>
                     <td>{{$mascota->especie}}</td>
                     <td>{{$mascota->descripcion}}</td>
@@ -38,6 +45,12 @@
                             @method('DELETE')
                             <button type="submit">Eliminar</button>
                         </form>
+                        <form action=" {{ route('mascotas.edit', $mascota->id) }} " method = "POST">
+                            @csrf
+                            @method('GET')
+                            <button type="submit">Editar</button>
+                        </form>
+                        <a href=" {{ route('mascotas.edit', $mascota->id) }} ">Editar</a>
                             
                     </td>
                 </tr>

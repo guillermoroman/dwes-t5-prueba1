@@ -40,6 +40,11 @@ class MascotaController extends Controller
             'foto' => 'nullable|image|max:2048'
         ]);
 
+        // Guardar archivo en el servidor
+        if ($request->hasFile('foto')){
+            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
+        }
+        
         // Guardar los datos
         Mascota::create($validated);
 
@@ -60,7 +65,8 @@ class MascotaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mascota = Mascota::findOrFail($id);
+        return view('mascotas.edit', compact('mascota'));
     }
 
     /**
@@ -68,7 +74,23 @@ class MascotaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validar los datos
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'especie' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'fecha_nacimiento' => 'nullable|date',
+            'foto' => 'nullable|image|max:2048'
+        ]);
+
+        // Recuperar mascota
+        $mascota = Mascota::findOrFail($id);
+
+        // Guardar los datos
+        $mascota->update($validated);
+
+        // Redirigir
+        return redirect()->route('mascotas.index')->with('success', 'Mascota modificada con éxito');
     }
 
     /**
