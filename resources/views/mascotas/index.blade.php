@@ -1,9 +1,10 @@
-<x-layout>
+<x-app-layout>
+    <x-slot name="header">
+        Lista de Mascotas
+    </x-slot>
     @if (session('success'))
         <p style="color:green">{{session('success')}}</p>
     @endif
-
-    <h1>Lista de Mascotas</h1>
 
     <table>
         <thead>
@@ -43,16 +44,16 @@
                             <button type="submit">Editar</button>
                         </form>
                         <a href=" {{ route('mascotas.edit', $mascota->id) }} ">Editar</a>
-                            
+
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</x-layout>
+</x-app-layout>
 
-   
-    
+
+
 
 
 
