@@ -9,15 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MascotaFactory extends Factory
 {
-    
-    
+
+
     public function definition(): array
     {
         return [
-            'nombre' => $this->fake()->firstName(),
-            'especie' => $this->fake()->randomElement(['Perro', 'Gato', 'Tortuga']),
+            'nombre' => fake()->firstName(),
+            'especie' => $this->faker->randomElement(['Perro', 'Gato', 'Tortuga']),
             'descripcion' => "Descripción de muestra",
-            'fecha_nacimiento'=> $this->fake()->dateTimeBetween('-10 years', 'now')
+            'fecha_nacimiento'=> fake()->dateTimeBetween('-10 years', 'now'),
+            'user_id' => fake()->numberBetween(3, 7),
 
         ];
     }

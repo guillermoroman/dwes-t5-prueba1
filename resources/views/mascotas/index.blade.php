@@ -50,6 +50,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $mascotas->links() }}
 </x-app-layout>
 
 

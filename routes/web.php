@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Lista todas las mascotas
+Route::get('/', [MascotaController::class, 'index'])->name('mascotas.index');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
